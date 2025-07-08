@@ -90,7 +90,7 @@ export function SkillsSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <div className={`text-4xl ${tech.color} mb-2 transition-colors duration-300 group-hover:scale-110`}>
-                  <i className={tech.icon} />
+                  <tech.icon />
                 </div>
                 <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                   {tech.name}

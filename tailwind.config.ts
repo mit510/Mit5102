@@ -10,6 +10,7 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -62,27 +63,38 @@ export default {
           ring: "var(--sidebar-ring)",
         },
       },
+
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        glow: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        snakeX: {
+          "0%": { width: "0%" },
+          "50%": { width: "100%" },
+          "100%": { width: "0%" },
+        },
+        snakeY: {
+          "0%": { height: "0%" },
+          "50%": { height: "100%" },
+          "100%": { height: "0%" },
         },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        glow: "glow 6s linear infinite",
+        "snake-x": "snakeX 1.5s linear infinite",
+        "snake-y": "snakeY 1.5s linear infinite",
       },
     },
   },

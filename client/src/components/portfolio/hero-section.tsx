@@ -35,7 +35,9 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-6 text-center relative z-10 pb-32">
+        {/* ↑ Added pb-32 for extra bottom padding */}
+
         <motion.div
           variants={fadeInDown}
           initial="hidden"
@@ -97,45 +99,45 @@ export function HeroSection() {
             </Button>
           </motion.div>
         </motion.div>
-
-        {/* Social Links */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-6"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 1.2 }}
-        >
-          <motion.a
-            href={personal.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-2xl hover:text-primary transition-colors duration-300"
-            whileHover={{ scale: 1.2, y: -5 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Github />
-          </motion.a>
-          <motion.a
-            href={personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-2xl hover:text-primary transition-colors duration-300"
-            whileHover={{ scale: 1.2, y: -5 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Linkedin />
-          </motion.a>
-          <motion.a
-            href={`mailto:${personal.email}`}
-            className="text-2xl hover:text-primary transition-colors duration-300"
-            whileHover={{ scale: 1.2, y: -5 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Mail />
-          </motion.a>
-        </motion.div>
       </div>
+
+      {/* Social Links - centered horizontally, positioned below content */}
+      <motion.div
+        className="absolute left-0.65 -translate-x-1/2 top-[75%] flex items-center justify-center gap-8 z-20"
+        variants={fadeInUp}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 1.2 }}
+      >
+        <motion.a
+          href="https://github.com/mit510"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/20 hover:bg-primary/20 transition-all duration-300"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Github className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
+        </motion.a>
+        <motion.a
+          href="https://www.linkedin.com/in/mit510/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/20 hover:bg-primary/20 transition-all duration-300"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Linkedin className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
+        </motion.a>
+        <motion.a
+          href={`mailto:${personal.email}`}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-muted/20 hover:bg-primary/20 transition-all duration-300"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Mail className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
+        </motion.a>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div

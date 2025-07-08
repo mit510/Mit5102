@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Download, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Download, Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -57,11 +57,15 @@ export function ContactSection() {
   };
 
   const downloadResume = () => {
-    // In a real application, you would have a proper resume PDF file
-    // For now, we'll just show a toast
+    const link = document.createElement("a");
+    link.href = "/Mitkumar_Patel_Resume.pdf";
+    link.download = "Mit-Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     toast({
       title: "Resume Download",
-      description: "Resume download feature would be implemented with actual PDF file.",
+      description: "Your resume download should begin shortly.",
     });
   };
 
@@ -153,7 +157,7 @@ export function ContactSection() {
               <h4 className="font-medium mb-4">Follow Me</h4>
               <div className="flex space-x-4">
                 <motion.a
-                  href={personal.github}
+                  href="https://github.com/mit510"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300"
@@ -173,12 +177,12 @@ export function ContactSection() {
                   <Linkedin className="w-5 h-5" />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://www.instagram.com/patel_mit_510"
                   className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors duration-300"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Twitter className="w-5 h-5" />
+                  <Instagram className="w-5 h-5" />
                 </motion.a>
               </div>
             </div>

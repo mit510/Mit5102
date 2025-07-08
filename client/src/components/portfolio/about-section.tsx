@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { User } from "lucide-react";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { portfolioData } from "@/lib/portfolio-data";
 import { slideInLeft, slideInRight, fadeInUp } from "@/lib/animations";
@@ -10,7 +9,7 @@ export function AboutSection() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
 
   return (
-    <section id="about" className="py-20 bg-muted/30">
+    <section id="about" className="py-24 bg-gradient-to-b from-background to-muted/40 rounded-xl shadow-inner">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -25,60 +24,56 @@ export function AboutSection() {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+          {/* Profile Image */}
           <motion.div
             variants={slideInLeft}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="relative"
+            className="relative flex justify-center"
           >
-            {/* Professional headshot placeholder */}
-            <div className="relative">
-              <motion.div
-                className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <User className="w-32 h-32 text-muted-foreground" />
-              </motion.div>
-              <motion.div
-                className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  transition: {
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                }}
+            <motion.div
+              className="relative w-72 h-72 rounded-full p-1 bg-gradient-to-tr from-[#7dd4ff] to-purple-400 shadow-2xl"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img
+                src="/profile.jpg"
+                alt="Mitkumar Patel"
+                className="w-full h-full object-cover rounded-full border-4 border-background"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
+          {/* About Text */}
           <motion.div
             variants={slideInRight}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold mb-6">
-              Full-Stack Developer & Problem Solver
+            <h3 className="text-2xl font-semibold mb-6 text-foreground">
+              Software Developer & Problem Solver
             </h3>
+
             <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
-              <p>
-                With hands-on experience in React Native, MERN stack, and cloud platforms like Azure, 
-                I specialize in creating scalable, end-to-end solutions. My passion lies in writing 
-                clean, efficient code and delivering features that solve real-world challenges.
-              </p>
-              <p>
-                Currently pursuing my Master's in Applied Computing at University of Windsor, 
-                I'm always eager to learn emerging technologies and collaborate with cross-functional teams 
-                to deliver exceptional user experiences.
-              </p>
+              <motion.p variants={fadeInUp}>
+                With hands-on experience in React Native, MERN stack, and cloud
+                platforms like Azure, I specialize in creating scalable,
+                end-to-end solutions. My passion lies in writing clean,
+                efficient code and delivering features that solve real-world
+                challenges.
+              </motion.p>
+              <motion.p variants={fadeInUp}>
+                Currently pursuing my Master's in Applied Computing at the
+                University of Windsor, I'm always eager to learn emerging
+                technologies and collaborate with cross-functional teams to
+                deliver exceptional user experiences.
+              </motion.p>
             </div>
 
-            {/* Stats Counter */}
+            {/* Stats */}
             <motion.div
               ref={ref}
               className="grid grid-cols-3 gap-6"
@@ -88,11 +83,11 @@ export function AboutSection() {
             >
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className={`text-3xl font-bold text-${stat.color} mb-2`}>
+                  <div className="text-4xl font-extrabold text-[#7dd4ff] tracking-tight mb-1">
                     <AnimatedCounter end={stat.value} />
                     {stat.label === "Years Experience" && "+"}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
                     {stat.label}
                   </div>
                 </div>

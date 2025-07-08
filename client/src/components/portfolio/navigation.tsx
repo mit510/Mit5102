@@ -24,8 +24,8 @@ export function Navigation() {
       setIsScrolled(window.scrollY > 50);
 
       // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.slice(1));
-      const current = sections.find(section => {
+      const sections = navItems.map((item) => item.href.slice(1));
+      const current = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -33,7 +33,7 @@ export function Navigation() {
         }
         return false;
       });
-      
+
       if (current) {
         setActiveSection(current);
       }
@@ -65,10 +65,15 @@ export function Navigation() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <motion.div
-              className="text-2xl font-bold gradient-text"
+              className="w-20 h-20 rounded-full overflow-hidden"
               whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             >
-              MP
+              <img
+                src="../../../public/logo.png" // ✅ Replace with your image path
+                alt="MP Logo"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
 
             {/* Desktop Navigation */}
