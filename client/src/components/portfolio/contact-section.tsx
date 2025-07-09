@@ -6,8 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { portfolioData } from "@/lib/portfolio-data";
 import { slideInLeft, slideInRight, fadeInUp } from "@/lib/animations";
 
@@ -28,28 +26,38 @@ export function ContactSection() {
     message: "",
   });
 
-  const contactMutation = useMutation({
-    mutationFn: (data: ContactForm) => apiRequest("POST", "/api/contact", data),
-    onSuccess: async (response) => {
-      const result = await response.json();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // For Netlify Forms deployment
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
       toast({
         title: "Message Sent!",
-        description: result.message,
+        description: "Thank you for your message! I'll get back to you soon.",
       });
+      
       setFormData({ name: "", email: "", subject: "", message: "" });
-    },
-    onError: (error) => {
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    contactMutation.mutate(formData);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -178,7 +186,9 @@ export function ContactSection() {
                 </motion.a>
                 <motion.a
                   href="https://www.instagram.com/patel_mit_510"
-                  className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors duration-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-pink-500 transition-colors duration-300"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -209,7 +219,22 @@ export function ContactSection() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form 
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+            >
+              {/* Hidden fields for Netlify Forms */}
+              <input type="hidden" name="form-name" value="contact" />
+              <div className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </div>
+
               <div>
                 <Label htmlFor="name">Name</Label>
                 <Input
@@ -267,11 +292,11 @@ export function ContactSection() {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
                   type="submit"
-                  disabled={contactMutation.isPending}
+                  disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-primary to-secondary text-primary-foreground"
                   size="lg"
                 >
-                  {contactMutation.isPending ? "Sending..." : "Send Message"}
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </motion.div>
             </form>
