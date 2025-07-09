@@ -70,7 +70,7 @@ export function Navigation() {
               transition={{ duration: 0.3 }}
             >
               <img
-                src="../../../logo.png" // ✅ Replace with your image path
+                src="../../../public/logo.png" // ✅ Replace with your image path
                 alt="MP Logo"
                 className="w-full h-full object-cover"
               />

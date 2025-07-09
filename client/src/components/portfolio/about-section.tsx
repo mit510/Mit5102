@@ -39,7 +39,7 @@ export function AboutSection() {
               transition={{ duration: 0.3 }}
             >
               <img
-                src="/profile.jpg"
+                src="../../../public/profile.jpg" // ✅ Replace with your image path
                 alt="Mitkumar Patel"
                 className="w-full h-full object-cover rounded-full border-4 border-background"
               />
